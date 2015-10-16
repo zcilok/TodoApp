@@ -4,6 +4,7 @@ function TodoController ($scope) {
 	$scope.todos = (localStorage.getItem('todos')!==null) ? JSON.parse($scope.saved) : [ {text: 'Learn AngularJS', done: false}, {text: 'Build an Angular app', done: false} ];
 	localStorage.setItem('todos', JSON.stringify($scope.todos));
 
+	//function adding plan
 	$scope.addTodo = function() {
 		$scope.todos.push({
 			text: $scope.todoText,
@@ -13,14 +14,16 @@ function TodoController ($scope) {
 		localStorage.setItem('todos', JSON.stringify($scope.todos));
 	};
 
+	//function calculate how many remaining
 	$scope.remaining = function() {
-		var count = 0;
+		var remain = 0;
 		angular.forEach($scope.todos, function(todo){
-			count+= todo.done ? 0 : 1;
+			remain+= todo.done ? 0 : 1;
 		});
-		return count;
+		return remain;
 	};
 
+	//function deleting
 	$scope.archive = function() {
 		var oldTodos = $scope.todos;
 		$scope.todos = [];
